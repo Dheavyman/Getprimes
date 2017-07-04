@@ -1,22 +1,21 @@
-'using strict';
+'use strict';
 
 module.exports = {
     getPrimes: (n) => {
-
-        if ((typeof(value) !== 'number') || (n <= 1)){
-            return 'invalid input';
+        if (typeof(n) != 'number') {
+            return 'Invalid input entered';
+        }
+        else if ( n <= 1) {
+            return 'Number must be greater than 1';
         }
         else {
-            let listOfPrimes = [];
-            for (var i = 2; i <= n; i++){
-                let notPrime = false;
-                for (var j = 2; j < i; j++){
-                    if (i % j == 0) {
-                        notPrime = true;
-                    }
-                }
-                if(notPrime == false){
+            let sieve = [], i, j, listOfPrimes = [];
+            for (i = 2; i <= n; ++i) {
+                if (!sieve[i]) {
                     listOfPrimes.push(i);
+                    for (j = i << 1; j <= n; j += i) {
+                        sieve[j] = true;
+                    }
                 }
             }
             return listOfPrimes;
